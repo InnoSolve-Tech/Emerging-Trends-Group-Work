@@ -22,7 +22,7 @@ Before running the project, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/InnoSolve-Tech/Group_BSE24_16.git
 cd your-repo
 ```
 
@@ -52,7 +52,7 @@ cd backend
 npm run dev
 ```
 
-The Express server will start on `http://localhost:5000` (default port).
+The Express server will start on `http://localhost:4000` (default port).
 
 #### Running Frontend (React)
 To start the React frontend, run the following commands:
@@ -71,7 +71,7 @@ To build the backend for production, run:
 
 ```bash
 cd backend
-npm run build
+npm run start
 ```
 
 #### Frontend
@@ -90,7 +90,7 @@ This will generate a `build/` directory for your React app, ready for deployment
 
 | Method | Endpoint       | Description            |
 |--------|----------------|------------------------|
-| GET    | `/api/example`  | Sample API route       |
+| GET    | `/`  | Sample API route       |
 
 ## Technologies Used
 
