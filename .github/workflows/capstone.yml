@@ -1,0 +1,35 @@
+name: Fullstack CI Build
+'on':
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install and build frontend (React)
+        run: |
+          cd frontend   # Navigate to frontend directory
+          npm install   # Install frontend dependencies
+          npm run build # Build the React app
+      - name: Install backend dependencies (Express)
+        run: |
+          cd backend    # Navigate to backend directory
+          npm install   # Install backend dependencies
+      - name: Run backend tests (if applicable)
+        run: |
+          cd backend
+          npm test      # Run Express.js tests
+      - name: Run frontend tests (if applicable)
+        run: |
+          cd frontend
+          npm test      # Run React tests
