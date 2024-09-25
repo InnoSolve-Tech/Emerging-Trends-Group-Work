@@ -31,15 +31,21 @@ jobs:
         cd frontend   # Navigate to frontend directory
         npm install   # Install frontend dependencies
         npm run build # Build the React app
+        
+    # Step 4: Run frontend tests (if applicable)
+    - name: Run frontend tests (jest)
+      run: |
+        cd frontend
+        npm test      # Run React jest tests
 
-    # Step 4: Install dependencies for backend (Express.js)
+    # Step 5: Install dependencies for backend (Express.js)
     - name: Install backend dependencies (Express)
       run: |
         cd backend    # Navigate to backend directory
         npm install   # Install backend dependencies
 
-    # Step 5: Run frontend tests (if applicable)
-    - name: Run frontend tests (if applicable)
+    # Step 6: Run backend tests (Jest + Supertest)
+    - name: Run backend tests
       run: |
-        cd frontend
-        npm test      # Run React tests
+        cd backend
+        npm test      # Run backend Jest tests
