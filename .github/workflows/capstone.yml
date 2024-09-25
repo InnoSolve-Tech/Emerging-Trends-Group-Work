@@ -1,35 +1,51 @@
 name: Fullstack CI Build
-'on':
+
+# Trigger the workflow on code push or pull request
+on:
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+
 jobs:
   build:
+    # Use the latest Ubuntu version for the runner environment
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install and build frontend (React)
-        run: |
-          cd frontend   # Navigate to frontend directory
-          npm install   # Install frontend dependencies
-          npm run build # Build the React app
-      - name: Install backend dependencies (Express)
-        run: |
-          cd backend    # Navigate to backend directory
-          npm install   # Install backend dependencies
-      - name: Run backend tests (if applicable)
-        run: |
-          cd backend
-          npm test      # Run Express.js tests
-      - name: Run frontend tests (if applicable)
-        run: |
-          cd frontend
-          npm test      # Run React tests
+    # Step 1: Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Updated to v3
+
+    # Step 2: Set up Node.js environment
+    - name: Set up Node.js
+      uses: actions/setup-node@v3  # Updated to v3
+      with:
+        node-version: '16'  # Now using Node 16
+
+    # Step 3: Install dependencies and build frontend (React)
+    - name: Install and build frontend (React)
+      run: |
+        cd frontend   # Navigate to frontend directory
+        npm install   # Install frontend dependencies
+        npm run build # Build the React app
+
+    # Step 4: Install dependencies and build backend (Express.js)
+    - name: Install backend dependencies (Express)
+      run: |
+        cd backend    # Navigate to backend directory
+        npm install   # Install backend dependencies
+
+    # Step 5: Run tests for backend (Optional, if you have tests)
+    - name: Run backend tests (if applicable)
+      run: |
+        cd backend
+        npm test      # Run Express.js tests
+
+    # Step 6: Run tests for frontend (Optional, if you have tests)
+    - name: Run frontend tests (if applicable)
+      run: |
+        cd frontend
+        npm test      # Run React tests
