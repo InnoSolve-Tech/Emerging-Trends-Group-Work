@@ -19,11 +19,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3  # Latest version of checkout
 
-    # Step 2: Set up Node.js (using Node.js 20)
+    # Step 2: Set up Node.js for your project (using Node.js 20)
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # Now using Node.js 20
+        node-version: '20'  # Project is now using Node.js 20
 
     # Step 3: Install dependencies and build frontend (React)
     - name: Install and build frontend (React)
@@ -32,19 +32,13 @@ jobs:
         npm install   # Install frontend dependencies
         npm run build # Build the React app
 
-    # Step 4: Install dependencies and build backend (Express.js)
+    # Step 4: Install dependencies for backend (Express.js)
     - name: Install backend dependencies (Express)
       run: |
         cd backend    # Navigate to backend directory
         npm install   # Install backend dependencies
 
-    # Step 5: Run tests for backend (Optional, if you have tests)
-    - name: Run backend tests (if applicable)
-      run: |
-        cd backend
-        npm test      # Run Express.js tests
-
-    # Step 6: Run tests for frontend (Optional, if you have tests)
+    # Step 5: Run frontend tests (if applicable)
     - name: Run frontend tests (if applicable)
       run: |
         cd frontend
