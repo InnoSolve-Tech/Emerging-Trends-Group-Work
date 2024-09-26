@@ -28,7 +28,7 @@ jobs:
           npm run build --no-lint
 
       - name: Install backend dependencies
-        working-directory: ./backend  # Change to your backend directory
+        working-directory: ./backend/functions  # Change to your backend directory
         run: |
           npm install
 
