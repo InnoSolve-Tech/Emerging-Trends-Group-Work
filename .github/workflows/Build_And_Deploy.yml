@@ -1,0 +1,44 @@
+name: Build and Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20' # Specify the Node.js version
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend  # Change to your frontend directory
+        run: |
+          npm install
+          npm run build
+
+      - name: Install backend dependencies
+        working-directory: ./backend  # Change to your backend directory
+        run: |
+          npm install
+
+      - name: Deploy frontend to Firebase
+        working-directory: ./frontend  # Change to your frontend directory
+        run: |
+          firebase deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_FRONTEND_TOKEN }}
+
+      - name: Deploy backend to Firebase
+        working-directory: ./backend  # Change to your backend directory
+        run: |
+          firebase deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_BACKEND_TOKEN }}
