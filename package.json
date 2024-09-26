@@ -7,7 +7,9 @@
     "dev": "concurrently \"npm run start --prefix frontend\" \"cross-env NODE_ENV=development npm run server --prefix backend\"",
     "frontend": "cd frontend && npm start",
     "backend": "cd backend && npm start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
+
   },
   "author": "",
   "license": "ISC",
