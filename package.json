@@ -1,0 +1,16 @@
+{
+  "name": "group_bse24_16",
+  "version": "1.0.0",
+  "description": "This project contains a simple web application with a **backend** powered by Express and a **frontend** built with React, both written in TypeScript. The backend runs on Node.js 20.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run start --prefix frontend\" \"npm run dev --prefix backend\"",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
