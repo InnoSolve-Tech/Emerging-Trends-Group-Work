@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: '20'
 
+      # Install backend dependencies and run linting and tests
       - name: Install backend dependencies
         run: |
           cd backend
@@ -49,6 +50,7 @@ jobs:
             npm test || true # Prevent failing if no tests exist
           fi
 
+      # Install frontend dependencies and run linting and tests
       - name: Install frontend dependencies
         run: |
           cd frontend
