@@ -2,37 +2,80 @@ name: Lint and Test
 on:
   push:
     branches:
-      - 'testing'  # or the specific branch you want this to run on
+      - testing  # Adjust as necessary
   pull_request:
     branches:
-      - 'testing'  # or the specific branch you want this to run on
+      - testing  # Adjust as necessary
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
+
       - name: Install backend dependencies
         run: |
           cd backend
           npm install
+
+      - name: Check for lint script in backend
+        id: check_lint_backend
+        run: |
+          cd backend
+          if grep -q '"lint":' package.json; then
+            echo "Lint script exists."
+            echo "::set-output name=lint_exists::true"
+          else
+            echo "Lint script does not exist."
+            echo "::set-output name=lint_exists::false"
+          fi
+
+      - name: Lint backend
+        if: steps.check_lint_backend.outputs.lint_exists == 'true'
+        run: |
+          cd backend
+          npm run lint
+
       - name: Run backend tests
         run: |
           cd backend
           if [ -f package.json ] && grep -q '"test"' package.json; then
+            echo "Running backend tests..."
             npm test || true # Prevent failing if no tests exist
           fi
+
       - name: Install frontend dependencies
         run: |
           cd frontend
           npm install
+
+      - name: Check for lint script in frontend
+        id: check_lint_frontend
+        run: |
+          cd frontend
+          if grep -q '"lint":' package.json; then
+            echo "Lint script exists."
+            echo "::set-output name=lint_exists::true"
+          else
+            echo "Lint script does not exist."
+            echo "::set-output name=lint_exists::false"
+          fi
+
+      - name: Lint frontend
+        if: steps.check_lint_frontend.outputs.lint_exists == 'true'
+        run: |
+          cd frontend
+          npm run lint
+
       - name: Run frontend tests
         run: |
           cd frontend
           if [ -f package.json ] && grep -q '"test"' package.json; then
+            echo "Running frontend tests..."
             npm test || true # Prevent failing if no tests exist
           fi
