@@ -1,6 +1,4 @@
-import React from 'react'
 import Dashboard from '../pages/Dashboard';
-import Task from '../pages/TodoDetails';
 import { Route, Routes } from 'react-router';
 import TodoDetails from '../pages/TodoDetails';
 

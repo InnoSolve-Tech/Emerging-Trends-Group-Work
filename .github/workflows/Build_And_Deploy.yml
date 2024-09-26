@@ -20,23 +20,17 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: ./frontend  # Change to your frontend directory
-        env:
-          CI: false 
         run: |
           npm install
           npm run build
 
       - name: Install backend dependencies
         working-directory: ./backend  # Change to your backend directory
-        env:
-          CI: false 
         run: |
           npm install
 
       - name: Deploy frontend to Firebase
         working-directory: ./frontend  # Change to your frontend directory
-        env:
-          CI: false 
         run: |
           firebase deploy --only hosting
         env:
@@ -44,8 +38,6 @@ jobs:
 
       - name: Deploy backend to Firebase
         working-directory: ./backend  # Change to your backend directory
-        env:
-          CI: false 
         run: |
           firebase deploy --only hosting
         env:
