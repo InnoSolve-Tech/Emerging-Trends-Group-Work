@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: '20'
 
+      # Install backend dependencies and run linting and tests
       - name: Install backend dependencies
         run: |
           cd backend
@@ -34,10 +35,9 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          if [ -f package.json ] && grep -q '"test"' package.json; then
-            npm test || true # Prevent failing if no tests exist
-          fi
+          npm test || true # Prevent failing if no tests exist
 
+      # Install frontend dependencies and run linting and tests
       - name: Install frontend dependencies
         run: |
           cd frontend
@@ -51,6 +51,4 @@ jobs:
       - name: Run frontend tests
         run: |
           cd frontend
-          if [ -f package.json ] && grep -q '"test"' package.json; then
-            npm test || true # Prevent failing if no tests exist
-          fi
+          npm test || true # Prevent failing if no tests exist
