@@ -3,10 +3,10 @@ name: Lint and Test
 on:
   push:
     branches:
-      - "*"
+      - testing
   pull_request:
     branches:
-      - "*"
+      - testing
 
 jobs:
   lint-and-test:
