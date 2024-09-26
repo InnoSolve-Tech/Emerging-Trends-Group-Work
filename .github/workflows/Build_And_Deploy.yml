@@ -40,4 +40,4 @@ jobs:
       - name: Deploy backend to Firebase
         working-directory: ./backend  # Change to your backend directory
         run: |
-          firebase deploy --only hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+          firebase deploy --only hosting, functions --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
