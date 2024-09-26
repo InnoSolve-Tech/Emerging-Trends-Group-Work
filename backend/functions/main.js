@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import CORS
-const todoRoutes = require('../routes/todoRoutes');
+const cors = require('cors');
+const todoRoutes = require('./routes/todoRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -14,6 +14,7 @@ app.use(cors()); // Use CORS middleware
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI;
+
 mongoose.connect(uri)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Error connecting to MongoDB:', err));

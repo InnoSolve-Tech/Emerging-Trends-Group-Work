@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS
-const todoRoutes = require('../routes/todoRoutes');
+const todoRoutes = require('./routes/todoRoutes');
 require('dotenv').config();
 
 const app = express();
