@@ -32,12 +32,12 @@ jobs:
         run: |
           npm install
 
-      - name: Deploy frontend to Firebase
+      - name: Deploy backend to Firebase Functions
+        working-directory: ./backend  # Change to your backend directory
+        run: |
+          firebase deploy --only functions --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+
+      - name: Deploy frontend to Firebase Hosting
         working-directory: ./frontend  # Change to your frontend directory
         run: |
           firebase deploy --only hosting --token ${{ secrets.FIREBASE_FRONTEND_TOKEN }}
-
-      - name: Deploy backend to Firebase
-        working-directory: ./backend  # Change to your backend directory
-        run: |
-          firebase deploy --only hosting, functions --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
