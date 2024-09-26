@@ -28,6 +28,7 @@ jobs:
         run: |
           cd backend
           if [ -f package.json ] && grep -q '"test"' package.json; then
+            echo "Running backend tests..."
             npm test || true # Prevent failing if no tests exist
           fi
       - name: Install frontend dependencies
@@ -42,4 +43,6 @@ jobs:
         run: |
           cd frontend
           if [ -f package.json ] && grep -q '"test"' package.json; then
-            npm test || true
+            echo "Running frontend tests..."
+            npm test || true # Prevent failing if no tests exist
+          fi
