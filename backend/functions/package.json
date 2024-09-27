@@ -7,10 +7,10 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "server": "nodemon node index.js"
+    "server": "nodemon node main.js"
   },
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "main": "index.js",
   "author": "",

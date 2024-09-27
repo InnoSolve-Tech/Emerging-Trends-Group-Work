@@ -2,7 +2,9 @@
 import axios from 'axios';
 import ITodoItem from '../interfaces/ITodoItem';
 
-const API_URL = 'http://localhost:4000/api/todos'; // Adjust this URL based on your backend server
+const API_URL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:4000/api/todos' // Development API URL
+  : 'https://capstone-backend-bse-16.web.app/api/todos';
 
 // Function to fetch all todos
 export const fetchTodos = async (): Promise<ITodoItem[]> => {

@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: lint-and-test
 
     steps:
       - name: Checkout code
@@ -16,28 +17,28 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20' # Specify the Node.js version
+          node-version: '20'
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
       - name: Install frontend dependencies
-        working-directory: ./frontend  # Change to your frontend directory
+        working-directory: ./frontend
         run: |
           npm install
           npm run build --no-lint
 
       - name: Install backend dependencies
-        working-directory: ./backend  # Change to your backend directory
+        working-directory: ./backend/functions
         run: |
           npm install
 
       - name: Deploy frontend to Firebase
-        working-directory: ./frontend  # Change to your frontend directory
+        working-directory: ./frontend
         run: |
           firebase deploy --only hosting --token ${{ secrets.FIREBASE_FRONTEND_TOKEN }}
 
       - name: Deploy backend to Firebase
-        working-directory: ./backend/functions  # Change to your backend directory
+        working-directory: ./backend
         run: |
-          firebase deploy --only functions --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+          firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}

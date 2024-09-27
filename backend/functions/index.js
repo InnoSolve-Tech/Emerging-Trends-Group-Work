@@ -2,11 +2,10 @@ const functions = require("firebase-functions");
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS
-const todoRoutes = require('../routes/todoRoutes');
+const todoRoutes = require('./routes/todoRoutes');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 4000;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -27,5 +26,8 @@ app.use('/api', todoRoutes);
 app.get('/', (req, res) => {
   res.send('Server is up and running!');
 });
+
+//const PORT = 4000;
+//app.listen(PORT, console.log(`listening on PORT ${PORT}`));
 
 exports.app = functions.https.onRequest(app)
