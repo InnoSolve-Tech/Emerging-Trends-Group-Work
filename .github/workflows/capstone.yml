@@ -4,10 +4,10 @@ name: Fullstack CI Build
 on:
   push:
     branches:
-      - main
+      - test-creation
   pull_request:
     branches:
-      - main
+      - test-creation
 
 jobs:
   build:
