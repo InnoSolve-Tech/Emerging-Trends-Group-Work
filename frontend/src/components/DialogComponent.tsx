@@ -1,3 +1,5 @@
+import React from "react";
+
 interface DialogProps {
   isOpen: boolean;
   newTodoTitle: string;
@@ -22,7 +24,9 @@ function DialogComponent({
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
-        <h2 className="text-2xl font-bold text-purple-600 mb-4">Create New Todo</h2>
+        <h2 className="text-2xl font-bold text-purple-600 mb-4">
+          Create New Todo
+        </h2>
         <div>
           <input
             type="text"
