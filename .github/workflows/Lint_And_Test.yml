@@ -23,7 +23,8 @@ jobs:
           cd backend
           npm install
 
-      - name: Lint backend
+      - name: Check for lint script in backend
+        id: check_lint_backend
         run: |
           cd backend
           npm run lint || true # Prevent failing if lint has issues
@@ -41,7 +42,8 @@ jobs:
           cd frontend
           npm install
 
-      - name: Lint frontend
+      - name: Check for lint script in frontend
+        id: check_lint_frontend
         run: |
           cd frontend
           npm run lint || true # Prevent failing if lint has issues
