@@ -42,11 +42,10 @@ jobs:
         run: |
           firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }} | tee deploy_log.txt
           
-      - name: Check deployment and Rollback on failure
+      - name: Check frontend deployment and Rollback on failure
         if: failure()
         run: |
-          echo "Deployment failed. Initiating rollback..."
-          firebase hosting:rollback --token ${{ secrets.FIREBASE_FRONTEND_TOKEN }} || echo "Frontend rollback failed."
+          firebase hosting:revert --token ${{ secrets.FIREBASE_FRONTEND_TOKEN }} || echo "Frontend rollback failed."
 
       - name: Extract failed function names
         id: extract_failed
@@ -58,8 +57,6 @@ jobs:
       - name: Check backend deployment and Rollback on failure
         if: failure()
         run: |
-          echo "Deployment failed for backend. Initiating rollback..."
-          
           # Get the failed functions from the environment variable
           IFS=' ' read -r -a FUNCTION_ARRAY <<< "${{ env.failed_functions }}"
 
