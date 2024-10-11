@@ -40,17 +40,40 @@ jobs:
       - name: Deploy backend to Firebase
         working-directory: ./backend
         run: |
-          firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+          firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }} | tee deploy_log.txt
           
       - name: Check deployment and Rollback on failure
         if: failure()
         run: |
           echo "Deployment failed. Initiating rollback..."
           firebase hosting:rollback --token ${{ secrets.FIREBASE_FRONTEND_TOKEN }} || echo "Frontend rollback failed."
-      
-      - name: Check deployment and Rollback on failure
+
+      - name: Extract failed function names
+        id: extract_failed
+        run: |
+          FAILED_FUNCTIONS=$(grep -oP 'Function (\w+) failed' deploy_log.txt | cut -d' ' -f2 | sort | uniq)
+          echo "Failed functions: $FAILED_FUNCTIONS"
+          echo "failed_functions=${FAILED_FUNCTIONS}" >> $GITHUB_ENV
+          
+      - name: Check backend deployment and Rollback on failure
         if: failure()
         run: |
-          echo "Deployment failed. Initiating rollback for backend..."
-          firebase functions:rollback --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
-      
+          echo "Deployment failed for backend. Initiating rollback..."
+          
+          # Get the failed functions from the environment variable
+          IFS=' ' read -r -a FUNCTION_ARRAY <<< "${{ env.failed_functions }}"
+
+          # Loop through each failed function and rollback
+          for FUNCTION_NAME in "${FUNCTION_ARRAY[@]}"; do
+            echo "Rolling back function: $FUNCTION_NAME"
+            
+            # Get the last known good version
+            LAST_VERSION=$(firebase functions:list --token ${{ secrets.FIREBASE_BACKEND_TOKEN }} --format json | jq -r '.[] | select(.status=="ACTIVE" and .function == "'"${FUNCTION_NAME}"'") | .version' | sort -r | head -n 1)
+
+            if [ -z "$LAST_VERSION" ]; then
+              echo "No successful versions found for function $FUNCTION_NAME."
+            else
+              echo "Rolling back to last successful version: $LAST_VERSION"
+              firebase functions:deploy $FUNCTION_NAME --version $LAST_VERSION --token ${{ secrets.FIREBASE_BACKEND_TOKEN }} || echo "Rollback failed for function $FUNCTION_NAME."
+            fi
+          done
