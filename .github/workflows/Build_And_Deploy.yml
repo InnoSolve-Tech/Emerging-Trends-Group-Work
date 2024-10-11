@@ -41,3 +41,9 @@ jobs:
         working-directory: ./backend
         run: |
           firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+          
+      - name: Check deployment and Rollback on failure
+        if: failure()
+        run: |
+          echo "Deployment failed. Initiating rollback..."
+          firebase hosting:rollback --token ${{ secrets.FIREBASE_TOKEN }}
