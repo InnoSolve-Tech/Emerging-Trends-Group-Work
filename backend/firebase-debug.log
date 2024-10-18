@@ -1,0 +1,93 @@
+[debug] [2024-10-11T10:14:45.273Z] ----------------------------------------------------------------------
+[debug] [2024-10-11T10:14:45.277Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Trevor Simon\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2024-10-11T10:14:45.278Z] CLI Version:   13.22.0
+[debug] [2024-10-11T10:14:45.278Z] Platform:      win32
+[debug] [2024-10-11T10:14:45.278Z] Node Version:  v22.9.0
+[debug] [2024-10-11T10:14:45.278Z] Time:          Fri Oct 11 2024 13:14:45 GMT+0300 (East Africa Time)
+[debug] [2024-10-11T10:14:45.278Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-11T10:14:45.367Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-11T10:14:45.368Z] > authorizing via signed-in user (strevor948@gmail.com)
+[debug] [2024-10-11T10:14:45.368Z] [iam] checking project capstone-backend-bse-16 for permissions ["firebase.projects.get"]
+[debug] [2024-10-11T10:14:45.370Z] Checked if tokens are valid: true, expires at: 1728643919351
+[debug] [2024-10-11T10:14:45.370Z] Checked if tokens are valid: true, expires at: 1728643919351
+[debug] [2024-10-11T10:14:45.371Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/capstone-backend-bse-16:testIamPermissions [none]
+[debug] [2024-10-11T10:14:45.371Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/capstone-backend-bse-16:testIamPermissions x-goog-quota-user=projects/capstone-backend-bse-16
+[debug] [2024-10-11T10:14:45.371Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/capstone-backend-bse-16:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-10-11T10:14:47.298Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/capstone-backend-bse-16:testIamPermissions 200
+[debug] [2024-10-11T10:14:47.298Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/capstone-backend-bse-16:testIamPermissions {}
+[debug] [2024-10-11T10:14:47.299Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project capstone-backend-bse-16:
+
+  firebase.projects.get
+[debug] [2024-10-11T10:14:47.306Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-10-11T10:14:47.309Z] defaultcredentials: writing to file C:\Users\Trevor Simon\AppData\Roaming\firebase\strevor948_gmail_com_application_default_credentials.json
+[debug] [2024-10-11T10:14:47.311Z] DEBUG: Setting GAC to C:\Users\Trevor Simon\AppData\Roaming\firebase\strevor948_gmail_com_application_default_credentials.json
+[debug] [2024-10-11T10:14:47.312Z] Checked if tokens are valid: true, expires at: 1728643919351
+[debug] [2024-10-11T10:14:47.312Z] Checked if tokens are valid: true, expires at: 1728643919351
+[debug] [2024-10-11T10:14:47.312Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/capstone-backend-bse-16/adminSdkConfig [none]
+[debug] [2024-10-11T10:14:47.943Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/capstone-backend-bse-16/adminSdkConfig 403
+[debug] [2024-10-11T10:14:47.944Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/capstone-backend-bse-16/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2024-10-11T10:14:47.945Z] Failed to get Admin SDK config for capstone-backend-bse-16, falling back to cache Failed to get Admin SDK for Firebase project capstone-backend-bse-16. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project capstone-backend-bse-16. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] !  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2024-10-11T10:14:47.966Z] [functions] Watching "F:\emerging trends\Group_BSE24_16\backend\functions" for Cloud Functions...
+[debug] [2024-10-11T10:14:47.982Z] Validating nodejs source
+[debug] [2024-10-11T10:14:48.958Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "server": "nodemon node main.js"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^6.0.1",
+    "mongoose": "^8.6.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.13",
+    "@types/supertest": "^6.0.2",
+    "firebase-functions-test": "^3.1.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.5",
+    "supertest": "^7.0.0"
+  },
+  "private": true
+}
+[debug] [2024-10-11T10:14:48.958Z] Building nodejs source
+[debug] [2024-10-11T10:14:48.959Z] Failed to find version of module node: reached end of search path F:\emerging trends\Group_BSE24_16\backend\functions\node_modules
+[warn] !  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[debug] [2024-10-11T10:14:48.962Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-10-11T10:14:48.970Z] Found firebase-functions binary at 'F:\emerging trends\Group_BSE24_16\backend\node_modules\.bin\firebase-functions'
+[info] Serving at port 8867
+
+[debug] [2024-10-11T10:14:49.992Z] Got response from /__/functions.yaml {"endpoints":{"app":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"app"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[error] Error connecting to MongoDB: MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+    at NativeConnection.createClient (F:\emerging trends\Group_BSE24_16\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\connection.js:219:11)
+    at NativeConnection.openUri (F:\emerging trends\Group_BSE24_16\backend\node_modules\mongoose\lib\connection.js:826:34)
+    at Mongoose.connect (F:\emerging trends\Group_BSE24_16\backend\node_modules\mongoose\lib\mongoose.js:447:15)
+    at Object.<anonymous> (F:\emerging trends\Group_BSE24_16\backend\functions\index.js:18:10)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+
+[debug] [2024-10-11T10:14:54.054Z] [functions] Loaded functions definitions from source: app.
+[debug] [2024-10-11T10:14:54.055Z] [functions[us-central1-app]] http function initialized (http://127.0.0.1:5000/capstone-backend-bse-16/us-central1/app).
+[info] i  functions: Loaded functions: app 
+[warn] !  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub, storage, eventarc, tasks 
