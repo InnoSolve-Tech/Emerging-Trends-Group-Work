@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: lint-and-test
 
     steps:
       - name: Checkout code
@@ -41,3 +42,21 @@ jobs:
         working-directory: ./backend
         run: |
           firebase deploy --only functions,hosting --token ${{ secrets.FIREBASE_BACKEND_TOKEN }}
+
+      - name: Start Docker containers
+        run: |
+          docker-compose up -d # This assumes a docker-compose.yml file exists
+
+      - name: Wait for Prometheus and Grafana to be ready
+        run: |
+          echo "Waiting for Prometheus and Grafana to start..."
+          sleep 30 # Adjust sleep time as needed
+
+      - name: Verify Prometheus and Grafana are running
+        run: |
+          curl -f http://localhost:9090/api/v1/targets || exit 1 # Check Prometheus
+          curl -f http://localhost:3000/api/search || exit 1 # Check Grafana
+
+      - name: Stop Docker containers
+        run: |
+          docker-compose down
