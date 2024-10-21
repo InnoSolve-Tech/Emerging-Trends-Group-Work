@@ -3,7 +3,7 @@ name: Build and Deploy to Firebase
 on:
   push:
     branches:
-      - trevor_simon
+      - main
 
 jobs:
   build-and-deploy:
